@@ -16,7 +16,7 @@
   boot.initrd.kernelModules = [ "apple_bce" "apple-ibridge" "apple-ib-tb" ];
 
   # Include wifi firmware
-  hardware.appleWifiFirmware.model = "MacBookPro15,1";
+  hardware.appleWifiFirmware.model = "MacBookPro16,2";
   hardware.firmware = [ (pkgs.apple-wifi-firmware.override { macModel = config.hardware.appleWifiFirmware.model; }) ];
 
   # Allow unfree - wifi firmware won't be installed otherwise.
@@ -24,18 +24,18 @@
 
   # Use GRUB
   boot.loader.efi.canTouchEfiVariables = false;
-  boot.loader.grub = {
-    efiSupport = true;
-    efiInstallAsRemovable = true;
-    device = "nodev";
-  };
+#  boot.loader.grub = {
+#    efiSupport = true;
+#    efiInstallAsRemovable = true;
+#    device = "nodev";
+#  };
 
   # Binary cache for t2linux derivations.
-  nix = {
-    binaryCaches = [
+  nix.settings = {
+    substituters = [
       "https://t2linux.cachix.org"
     ];
-    binaryCachePublicKeys = [
+    trusted-public-keys = [
       "t2linux.cachix.org-1:P733c5Gt1qTcxsm+Bae0renWnT8OLs0u9+yfaK2Bejw="
     ];
   };
